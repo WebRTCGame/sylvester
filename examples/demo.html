@@ -4,13 +4,16 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Polygon demo</title>
-    <script type="text/javascript" src="../lib/sylvester-min.js"></script>
+    <script type="module" src="sylvester.js"></script>
   </head>
   <body>
 
     <canvas id="screen" width="800" height="600"></canvas>
 
     <script type="text/javascript">
+    
+    //import {Vector,Matrix,Line,Plane} from '../src/sylvester.js';
+
         var P = Polygon.create([
             [0,0], [5,0], [5,5], [0,5], [0,10],
 
