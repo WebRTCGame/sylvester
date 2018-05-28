@@ -1,4 +1,7 @@
-const Sylvester = {version:"0.1.3", precision:1e-6};
+const Sylvester = {
+  version: "0.1.3",
+  precision: 1e-6
+};
 
 export class Vector {
   e(a) {
@@ -71,8 +74,8 @@ export class Vector {
     if (0 === d * e) {
       return null;
     }
-    a = c / (d * e);
-    -1 > a && (a = -1);
+    a = c / (d * e); -
+    1 > a && (a = -1);
     1 < a && (a = 1);
     return Math.acos(a);
   }
@@ -192,7 +195,7 @@ export class Vector {
   }
 
   rotate(a, b) {
-    switch(this.elements.length) {
+    switch (this.elements.length) {
       case 2:
         let c = b.elements || b;
         if (2 != c.length) {
@@ -219,7 +222,7 @@ export class Vector {
 
   reflectionIn(a) {
     if (a.anchor) {
-      const b = this.elements.slice();
+      const b = [...this.elements];
       a = a.pointClosestTo(b).elements;
       return Vector.create([a[0] + (a[0] - b[0]), a[1] + (a[1] - b[1]), a[2] + (a[2] - (b[2] || 0))]);
     }
@@ -229,7 +232,7 @@ export class Vector {
 
   to3D() {
     const a = this.dup();
-    switch(a.elements.length) {
+    switch (a.elements.length) {
       case 3:
         break;
       case 2:
@@ -246,7 +249,7 @@ export class Vector {
   }
 
   setElements(a) {
-    this.elements = (a.elements || a).slice();
+    this.elements = [...(a.elements || a)];
     return this;
   }
 
@@ -299,7 +302,10 @@ export class Matrix {
   }
 
   dimensions() {
-    return {rows:this.elements.length, cols:this.elements[0].length};
+    return {
+      rows: this.elements.length,
+      cols: this.elements[0].length
+    };
   }
 
   rows() {
@@ -479,7 +485,10 @@ export class Matrix {
       do {
         const g = d - f;
         if (this.elements[e][g] == a) {
-          return {i:e + 1, j:g + 1};
+          return {
+            i: e + 1,
+            j: g + 1
+          };
         }
       } while (--f);
     } while (--b);
@@ -742,7 +751,10 @@ export class Matrix {
 
   static Rotation(a, b) {
     if (!b) {
-      return Matrix.create([[Math.cos(a), -Math.sin(a)], [Math.sin(a), Math.cos(a)]]);
+      return Matrix.create([
+        [Math.cos(a), -Math.sin(a)],
+        [Math.sin(a), Math.cos(a)]
+      ]);
     }
     let c = b.dup();
     if (3 != c.elements.length) {
@@ -755,25 +767,41 @@ export class Matrix {
     d = Math.sin(a);
     const g = Math.cos(a);
     const h = 1 - g;
-    return Matrix.create([[h * e * e + g, h * e * f - d * c, h * e * c + d * f], [h * e * f + d * c, h * f * f + g, h * f * c - d * e], [h * e * c - d * f, h * f * c + d * e, h * c * c + g]]);
+    return Matrix.create([
+      [h * e * e + g, h * e * f - d * c, h * e * c + d * f],
+      [h * e * f + d * c, h * f * f + g, h * f * c - d * e],
+      [h * e * c - d * f, h * f * c + d * e, h * c * c + g]
+    ]);
   }
 
   static RotationX(a) {
     const b = Math.cos(a);
     a = Math.sin(a);
-    return Matrix.create([[1, 0, 0], [0, b, -a], [0, a, b]]);
+    return Matrix.create([
+      [1, 0, 0],
+      [0, b, -a],
+      [0, a, b]
+    ]);
   }
 
   static RotationY(a) {
     const b = Math.cos(a);
     a = Math.sin(a);
-    return Matrix.create([[b, 0, a], [0, 1, 0], [-a, 0, b]]);
+    return Matrix.create([
+      [b, 0, a],
+      [0, 1, 0],
+      [-a, 0, b]
+    ]);
   }
 
   static RotationZ(a) {
     const b = Math.cos(a);
     a = Math.sin(a);
-    return Matrix.create([[b, -a, 0], [a, b, 0], [0, 0, 1]]);
+    return Matrix.create([
+      [b, -a, 0],
+      [a, b, 0],
+      [0, 0, 1]
+    ]);
   }
 
   static Random(a, b) {
@@ -1069,7 +1097,10 @@ export class Plane {
       const f = a.anchor.elements;
       let g = Matrix.Zero(2, 2);
       for (a = 0; g.isSingular();) {
-        a++, g = Matrix.create([[d[a % 3], d[(a + 1) % 3]], [e[a % 3], e[(a + 1) % 3]]]);
+        a++, g = Matrix.create([
+          [d[a % 3], d[(a + 1) % 3]],
+          [e[a % 3], e[(a + 1) % 3]]
+        ]);
       }
       g = g.inverse().elements;
       b = d[0] * b[0] + d[1] * b[1] + d[2] * b[2];
