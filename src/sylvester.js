@@ -1,6 +1,6 @@
 const Sylvester = {version:"0.1.3", precision:1e-6};
 
-class Vector {
+export class Vector {
   e(a) {
     return 1 > a || a > this.elements.length ? null : this.elements[a - 1];
   }
@@ -275,7 +275,7 @@ Vector.i = Vector.create([1, 0, 0]);
 Vector.j = Vector.create([0, 1, 0]);
 Vector.k = Vector.create([0, 0, 1]);
 
-class Matrix {
+export class Matrix {
   e(a, b) {
     return 1 > a || a > this.elements.length || 1 > b || b > this.elements[0].length ? null : this.elements[a - 1][b - 1];
   }
@@ -796,7 +796,7 @@ class Matrix {
   }
 }
 
-class Line {
+export class Line {
   eql(a) {
     return this.isParallelTo(a) && this.contains(a.anchor);
   }
@@ -993,7 +993,7 @@ Line.X = Line.create(Vector.Zero(3), Vector.i);
 Line.Y = Line.create(Vector.Zero(3), Vector.j);
 Line.Z = Line.create(Vector.Zero(3), Vector.k);
 
-class Plane {
+export class Plane {
   eql(a) {
     return this.contains(a.anchor) && this.isParallelTo(a);
   }
@@ -1186,7 +1186,7 @@ Plane.ZX = Plane.create(Vector.Zero(3), Vector.j);
 Plane.YX = Plane.XY;
 Plane.ZY = Plane.YZ;
 Plane.XZ = Plane.ZX;
-const $V = Vector.create;
-const $M = Matrix.create;
-const $L = Line.create;
-const $P = Plane.create;
+export const $V = Vector.create;
+export const $M = Matrix.create;
+export const $L = Line.create;
+export const $P = Plane.create;
