@@ -7,12 +7,13 @@ export class Vector {
   constructor(a) {
     this.setElements(a);
   }
-  e(a) {
-    return 1 > a || a > this.elements.length ? null : this.elements[a - 1];
-  }
 
   dimensions() {
     return this.elements.length;
+  }
+
+  e(a) {
+    return 1 > a || a > this.elements.length ? null : this.elements[a - 1];
   }
 
   modulus() {
