@@ -6,6 +6,9 @@ const Sylvester = {
 export class Vector {
   constructor(a) {
     this.setElements(a);
+    Object.seal(this);
+    Object.freeze(this);
+
   }
 
   dimensions() {
@@ -153,6 +156,7 @@ export class Vector {
     return a;
   }
 
+
   indexOf(a) {
     let b = null;
     let c = this.elements.length;
@@ -297,6 +301,8 @@ Vector.k = new Vector([0, 0, 1]);
 export class Matrix {
   constructor(a) {
     this.setElements(a);
+    Object.seal(this);
+    Object.freeze(this);
   }
   e(a, b) {
     return 1 > a ||
@@ -324,13 +330,6 @@ export class Matrix {
     return new Vector(b);
   }
 
-  dimensions() {
-    return {
-      rows: this.elements.length,
-      cols: this.elements[0].length
-    };
-  }
-
   rows() {
     return this.elements.length;
   }
@@ -338,6 +337,17 @@ export class Matrix {
   cols() {
     return this.elements[0].length;
   }
+
+  dimensions() {
+    return {
+      rows: this.elements.length,
+      cols: this.elements[0].length
+    };
+  }
+
+
+
+
 
   eql(a) {
     a = a.elements || a;
@@ -842,6 +852,8 @@ export class Matrix {
 export class Line {
   constructor(a, b) {
     this.setVectors(a, b);
+    Object.seal(this);
+    Object.freeze(this);
   }
   eql(a) {
     return this.isParallelTo(a) && this.contains(a.anchor);
@@ -1081,6 +1093,8 @@ Line.Z = new Line(Vector.Zero(3), Vector.k);
 export class Plane {
   constructor(a, b, c) {
     this.setVectors(a, b, c);
+    Object.seal(this);
+    Object.freeze(this);
   }
   eql(a) {
     return this.contains(a.anchor) && this.isParallelTo(a);
@@ -1106,7 +1120,7 @@ export class Plane {
     return a.normal
       ? ((a = this.normal.angleFrom(a.normal)),
         Math.abs(a) <= Sylvester.precision ||
-          Math.abs(Math.PI - a) <= Sylvester.precision)
+        Math.abs(Math.PI - a) <= Sylvester.precision)
       : a.direction
         ? this.normal.isPerpendicularTo(a.direction)
         : null;
@@ -1151,8 +1165,8 @@ export class Plane {
     return (
       Math.abs(
         c[0] * (b[0] - a[0]) +
-          c[1] * (b[1] - a[1]) +
-          c[2] * (b[2] - (a[2] || 0))
+        c[1] * (b[1] - a[1]) +
+        c[2] * (b[2] - (a[2] || 0))
       ) <= Sylvester.precision
     );
   }
@@ -1183,8 +1197,8 @@ export class Plane {
       let e = a.normal.elements;
       const f = a.anchor.elements;
       let g = Matrix.Zero(2, 2);
-      for (a = 0; g.isSingular(); ) {
-        a++,
+      for (a = 0; g.isSingular();) {
+        a++ ,
           (g = new Matrix([
             [d[a % 3], d[(a + 1) % 3]],
             [e[a % 3], e[(a + 1) % 3]]
