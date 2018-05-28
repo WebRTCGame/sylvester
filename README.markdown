@@ -1,3 +1,11 @@
+# Sylvester Conversion to es2015+
+
+Just forking and converting to es2015+
+
+For docs see below.
+
+License intact below.
+
 # Sylvester
 
 Vector and Matrix math for JavaScript. [See the
